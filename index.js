@@ -21,23 +21,25 @@ class CFDI {
   version() {
     return this.xml.get(this.xpath('Comprobante', 'Version'));
   }
+
   crypto() {
+
+    // const sello_cfd = this.xml.get(this.xpath('TimbreFiscalDigital', 'SelloCFD'));
     const sello_cfd = this.xml.get(this.xpath('Comprobante', 'Sello'));
     const sello_sat = this.xml.get(
       this.xpath('TimbreFiscalDigital', 'SelloSAT')
     );
     const certificado = this.xml.get(this.xpath('Comprobante', 'Certificado'));
-    const id_certificado = this.xml.get(
+    const no_certificado_cfd = this.xml.get(
       this.xpath('Comprobante', 'NoCertificado')
     );
-    const sat_certificado = this.xml.get(
+    const no_certificado_sat = this.xml.get(
       this.xpath('TimbreFiscalDigital', 'NoCertificadoSAT')
     );
 
-    // const sello_cfd = this.xml.get(this.xpath('TimbreFiscalDigital', 'SelloCFD'));
-
-    return { sello_cfd, sello_sat, certificado };
+    return { sello_cfd, sello_sat, certificado, no_certificado_cfd, no_certificado_sat };
   }
+
   comprobante() {
     const serie = this.xml.get(this.xpath('Comprobante', 'Serie'));
     const folio = this.xml.get(this.xpath('Comprobante', 'Folio'));
@@ -67,6 +69,7 @@ class CFDI {
   relacionados() {
     return this.xml.get(this.xpath('CfdiRelacionados'));
   }
+
   emisor() {
     const RFC = this.xml.get(this.xpath('Emisor', 'Rfc'));
     const name = this.xml.get(this.xpath('Emisor', 'Nombre'));
@@ -74,18 +77,22 @@ class CFDI {
 
     return { RFC, name, regime };
   }
+
   receptor() {
     const RFC = this.xml.get(this.xpath('Receptor', 'Rfc'));
     const name = this.xml.get(this.xpath('Receptor', 'Nombre'));
 
     return { RFC, name };
   }
+
   conceptos() {
     return this.xml.get(this.xpath('Concepto'));
   }
+
   impuestos() {
     return this.xml.get(this.xpath('Impuestos'));
   }
+
   complemento() {
     const uuid = this.xml.get(this.xpath('TimbreFiscalDigital', 'UUID'));
     const fecha = this.xml.get(

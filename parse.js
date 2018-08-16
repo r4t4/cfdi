@@ -6,3 +6,5 @@ const one = new CFDI('./cfd/min-payment.xml');
 const two = new CFDI('./cfd/payment.xml');
 const three = new CFDI('./cfd/signed.xml');
 
+console.log(three.comprobante());
+
