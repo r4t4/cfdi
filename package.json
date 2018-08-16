@@ -1,5 +1,5 @@
 {
-  "name": "cfdi",
+  "name": "avanttia/cfdi",
   "version": "1.0.0",
   "description": "Simple CFDI Library",
   "main": "index.js",
