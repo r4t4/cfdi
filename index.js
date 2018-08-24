@@ -1,15 +1,64 @@
 'use strict';
 
-const XML = require('libxmljs');
 const FS = require('fs');
+
+const XML = require('libxmljs');
+const XML2JS = require('xml2js');
+const XPATH = require('xml2js-xpath');
+
 const Promise = require('bluebird');
+const parseXML = Promise.promisify(XML2JS.parseString);
+
+const debug = require('debug')('cfdi');
+const error = require('debug')('app:error');
 
 class CFDI {
-  // we receive a path, a file or a string
-  constructor(xml) {
-    let data = xml;
-    if (FS.existsSync(xml)) data = FS.readFileSync(xml);
-    this.xml = XML.parseXmlString(data, { noblanks: true });
+  /**
+   *  Comprobante Fiscal Digital SAT
+   *
+   * @param {string} xmlORpath
+   */
+  constructor(xmlORpath) {
+    return new Promise((resolve, reject) => {
+      // initialize for all CFD's
+      this.v = false;
+      // process the data
+      let data = xmlORpath;
+      const self = this;
+
+      if (FS.existsSync(xmlORpath)) {
+        data = FS.readFileSync(xmlORpath);
+      }
+      // we might break on some documents so we're checking first
+      try {
+        this.xml = XML.parseXmlString(data, {
+          noblanks: false,
+          recover: true,
+          noerror: true,
+          nonet: true,
+          nsclean: false,
+          dtdload: false,
+          dtdvalid: false,
+          old: true,
+        });
+        // now we know we can access the CFD's version
+        this.v = this.version();
+        debug(`CFDI:${this.v}`);
+        resolve(this);
+        // we might not get home the easy way
+      } catch (e) {
+        this.xml = false;
+        debug(e.message);
+        parseXML(data)
+          .then((json) => {
+            self.json = json;
+            self.v = self.version();
+            debug(`CFDI:${this.v}`);
+            resolve(self);
+          })
+          .catch(reject);
+      }
+    });
   }
 
   xpath(localname, attribute) {
@@ -18,88 +67,188 @@ class CFDI {
     return `string(${xpath}/@${attribute})`;
   }
 
-  version() {
-    return this.xml.get(this.xpath('Comprobante', 'Version'));
+  is33() {
+    return this.v == '3.3';
+  }
+  is32() {
+    return this.v == '3.2';
   }
 
-  crypto() {
-
-    // const sello_cfd = this.xml.get(this.xpath('TimbreFiscalDigital', 'SelloCFD'));
-    const sello_cfd = this.xml.get(this.xpath('Comprobante', 'Sello'));
-    const sello_sat = this.xml.get(
-      this.xpath('TimbreFiscalDigital', 'SelloSAT')
-    );
-    const certificado = this.xml.get(this.xpath('Comprobante', 'Certificado'));
-    const no_certificado_cfd = this.xml.get(
-      this.xpath('Comprobante', 'NoCertificado')
-    );
-    const no_certificado_sat = this.xml.get(
-      this.xpath('TimbreFiscalDigital', 'NoCertificadoSAT')
-    );
-
-    return { sello_cfd, sello_sat, certificado, no_certificado_cfd, no_certificado_sat };
+  version() {
+    if (!this.xml) {
+      const version = XPATH.evalFirst(this.json, '//cfdi:Comprobante', 'Version');
+      return version || XPATH.evalFirst(this.json, '//cfdi:Comprobante', 'version');
+    } else {
+      const version = this.xml.get(this.xpath('Comprobante', 'Version'));
+      return version || this.xml.get(this.xpath('Comprobante', 'version'));
+    }
   }
 
   comprobante() {
-    const serie = this.xml.get(this.xpath('Comprobante', 'Serie'));
-    const folio = this.xml.get(this.xpath('Comprobante', 'Folio'));
-    const fecha = this.xml.get(this.xpath('Comprobante', 'Fecha'));
-    const moneda = this.xml.get(this.xpath('Comprobante', 'Moneda'));
-    const tipo_cambio = this.xml.get(this.xpath('Comprobante', 'TipoCambio'));
-    const total = this.xml.get(this.xpath('Comprobante', 'Total'));
-    const descuento = this.xml.get(this.xpath('Comprobante', 'Descuento'));
-    const tipo = this.xml.get(this.xpath('Comprobante', 'TipoComprobante'));
-    const forma = this.xml.get(this.xpath('Comprobante', 'FormaPago'));
-    const metodo = this.xml.get(this.xpath('Comprobante', 'MetodoPago'));
+    if (!this.xml) {
+      const serie = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Serie' : 'serie');
+      const folio = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Folio' : 'folio');
+      const fecha = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Fecha' : 'fecha');
+      const moneda = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Moneda' : 'Moneda');
+      const tipo_cambio =
+        XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'TipoCambio' : 'tipoDeCambio') || null;
+      const total = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Total' : 'total');
+      const descuento =
+        XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Descuento' : 'descuento') || null;
+      const tipo = XPATH.evalFirst(
+        this.json,
+        '//cfdi:Comprobante',
+        this.is33() ? 'TipoDeComprobante' : 'tipoDeComprobante'
+      );
+      const forma = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'FormaPago' : 'formaDePago');
+      const metodo = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'MetodoPago' : 'metodoDePago');
 
-    return {
-      tipo,
-      serie,
-      folio,
-      fecha,
-      total,
-      descuento,
-      moneda,
-      tipo_cambio,
-      forma,
-      metodo,
-    };
+      return {
+        tipo,
+        serie,
+        folio,
+        fecha,
+        total,
+        descuento,
+        moneda,
+        tipo_cambio,
+        forma,
+        metodo,
+      };
+    } else {
+      const serie = this.xml.get(this.xpath('Comprobante', this.is33() ? 'Serie' : 'serie'));
+      const folio = this.xml.get(this.xpath('Comprobante', this.is33() ? 'Folio' : 'folio'));
+      const fecha = this.xml.get(this.xpath('Comprobante', this.is33() ? 'Fecha' : 'fecha'));
+      const moneda = this.xml.get(this.xpath('Comprobante', this.is33() ? 'Moneda' : 'Moneda'));
+      const tipo_cambio = this.xml.get(this.xpath('Comprobante', this.is33() ? 'TipoCambio' : 'tipoDeCambio')) || null;
+      const total = this.xml.get(this.xpath('Comprobante', this.is33() ? 'Total' : 'total'));
+      const descuento = this.xml.get(this.xpath('Comprobante', this.is33() ? 'Descuento' : 'descuento')) || null;
+      const tipo = this.xml.get(this.xpath('Comprobante', this.is33() ? 'TipoDeComprobante' : 'tipoDeComprobante'));
+      const forma = this.xml.get(this.xpath('Comprobante', this.is33() ? 'FormaPago' : 'formaDePago'));
+      const metodo = this.xml.get(this.xpath('Comprobante', this.is33() ? 'MetodoPago' : 'metodoDePago'));
+
+      return {
+        tipo,
+        serie,
+        folio,
+        fecha,
+        total,
+        descuento,
+        moneda,
+        tipo_cambio,
+        forma,
+        metodo,
+      };
+    }
+  }
+
+  crypto() {
+    if (!this.xml) {
+      const sello_cfd = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Sello' : 'sello');
+      const sello_sat = XPATH.evalFirst(this.json, '//tfd:TimbreFiscalDigital', this.is33() ? 'SelloSAT' : 'selloSAT');
+      const certificado = XPATH.evalFirst(this.json, '//cfdi:Comprobante', this.is33() ? 'Certificado' : 'certificado');
+      const no_certificado_cfd = XPATH.evalFirst(
+        this.json,
+        '//cfdi:Comprobante',
+        this.is33() ? 'NoCertificado' : 'noCertificado'
+      );
+      const no_certificado_sat = XPATH.evalFirst(
+        this.json,
+        '//tfd:TimbreFiscalDigital',
+        this.is33() ? 'NoCertificadoSAT' : 'noCertificadoSAT'
+      );
+
+      return {
+        sello_cfd,
+        sello_sat,
+        certificado,
+        no_certificado_cfd,
+        no_certificado_sat,
+      };
+    } else {
+      const sello_cfd = this.xml.get(this.xpath('Comprobante', 'Sello'));
+      const sello_sat = this.xml.get(this.xpath('TimbreFiscalDigital', 'SelloSAT'));
+      const certificado = this.xml.get(this.xpath('Comprobante', 'Certificado'));
+      const no_certificado_cfd = this.xml.get(this.xpath('Comprobante', 'NoCertificado'));
+      const no_certificado_sat = this.xml.get(this.xpath('TimbreFiscalDigital', 'NoCertificadoSAT'));
+
+      return {
+        sello_cfd,
+        sello_sat,
+        certificado,
+        no_certificado_cfd,
+        no_certificado_sat,
+      };
+    }
   }
 
   relacionados() {
-    return this.xml.get(this.xpath('CfdiRelacionados'));
+    return null;
+    // if (!this.xml) return null;
+    // return this.xml.get(this.xpath('CfdiRelacionados'));
   }
 
   emisor() {
-    const RFC = this.xml.get(this.xpath('Emisor', 'Rfc'));
-    const name = this.xml.get(this.xpath('Emisor', 'Nombre'));
-    const regime = this.xml.get(this.xpath('Emisor', 'RegimenFiscal'));
+    if (!this.xml) {
+      const RFC = XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'Rfc' : 'rfc');
+      const name = XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'Nombre' : 'nombre');
+      const regime =
+        XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'RegimenFiscal' : 'regimenFiscal') || null;
 
-    return { RFC, name, regime };
+      return { RFC, name, regime };
+    } else {
+      const RFC = this.xml.get(this.xpath('Emisor', this.is33() ? 'Rfc' : 'rfc'));
+      const name = this.xml.get(this.xpath('Emisor', this.is33() ? 'Nombre' : 'nombre'));
+      const regime = this.xml.get(this.xpath('Emisor', this.is33() ? 'RegimenFiscal' : 'regimeFiscal')) || null;
+
+      return { RFC, name, regime };
+    }
   }
 
   receptor() {
-    const RFC = this.xml.get(this.xpath('Receptor', 'Rfc'));
-    const name = this.xml.get(this.xpath('Receptor', 'Nombre'));
+    if (!this.xml) {
+      const RFC = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Rfc' : 'rfc');
+      const name = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Nombre' : 'rfc');
 
-    return { RFC, name };
+      return { RFC, name };
+    } else {
+      const RFC = this.xml.get(this.xpath('Receptor', this.is33() ? 'Rfc' : 'rfc'));
+      const name = this.xml.get(this.xpath('Receptor', this.is33() ? 'Nombre' : 'nombre'));
+
+      return { RFC, name };
+    }
   }
 
   conceptos() {
-    return this.xml.get(this.xpath('Concepto'));
+    return null;
+    // if (!this.xml) return null;
+    // return this.xml.get(this.xpath('Concepto'));
   }
 
   impuestos() {
-    return this.xml.get(this.xpath('Impuestos'));
+    return null;
+    // if (!this.xml) return null;
+    // return this.xml.get(this.xpath('Impuestos'));
+  }
+
+  uuid() {
+    if (!this.xml) {
+      return XPATH.evalFirst(this.json, '//cfdi:Complemento/tfd:TimbreFiscalDigital', 'UUID');
+    } else {
+      const complemento = this.xpath('Complemento');
+      const timbre = this.xpath('TimbreFiscalDigital');
+
+      return this.xml.get(`string(${complemento}${timbre}/@UUID)`);
+    }
   }
 
   complemento() {
-    const uuid = this.xml.get(this.xpath('TimbreFiscalDigital', 'UUID'));
-    const fecha = this.xml.get(
-      this.xpath('TimbreFiscalDigital', 'FechaTimbrado')
-    );
+    return null;
+    // if (!this.xml) return null;
+    // const uuid = this.xml.get(this.xpath('TimbreFiscalDigital', 'UUID'));
+    // const fecha = this.xml.get(this.xpath('TimbreFiscalDigital', 'FechaTimbrado'));
 
-    return this.xml.get(this.xpath('Complemento'));
+    // return { uuid, fecha };
   }
 }
 

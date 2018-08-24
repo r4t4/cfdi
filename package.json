@@ -1,5 +1,5 @@
 {
-  "name": "xml-cfdi",
+  "name": "cfdi-parser",
   "version": "1.0.0",
   "description": "Simple CFDI Library",
   "main": "index.js",
@@ -10,6 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "3.5.1",
-    "libxmljs": "0.19.1"
+    "debug": "3.1.0",
+    "libxmljs": "0.19.1",
+    "xml2js": "0.4.19",
+    "xml2js-xpath": "0.9.0"
   }
 }

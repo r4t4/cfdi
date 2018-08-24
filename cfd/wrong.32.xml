@@ -1,0 +1,67 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:cfdi = "http://www.sat.gob.mx/cfd/3"
+                  xsi:schemaLocation = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd"
+                  version = "3.2"
+                  serie = "E"
+                  folio = "A1-5503065-1901"
+                  fecha = "2016-01-21T22:05:11"
+                  sello = "lzXZWRp3RRzYX/gMiUPhGu3g40+5P78aV4Hc7Dca3SLbsxGMm5I0Dng322qwtfq9agwOOsmNU+b5KPdWsMLcOooXZOcjxQWQ0RDnk+PU4P1R8od38B1IiUzPU+5DFccS1xdF3b7p5Z7K+0JDtCUHUOp0MU7GDdxZk9RXQhrats4="
+                  formaDePago = "Pago en una sola exhibicion"
+                  noCertificado = "00001000000201676408"
+                  certificado = "MIIEtTCCA52gAwIBAgIUMDAwMDEwMDAwMDAyMDE2NzY0MDgwDQYJKoZIhvcNAQEFBQAwggGVMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSEwHwYJKoZIhvcNAQkBFhJhc2lzbmV0QHNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxFDASBgNVBAcMC0N1YXVodMOpbW9jMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxPjA8BgkqhkiG9w0BCQIML1Jlc3BvbnNhYmxlOiBDZWNpbGlhIEd1aWxsZXJtaW5hIEdhcmPDrWEgR3VlcnJhMB4XDTEyMDgwMTE4MjEzOFoXDTE2MDgwMTE4MjEzOFowgfYxLzAtBgNVBAMTJlRPVEFMIFBMQVkgVEVMRUNPTVVOSUNBQ0lPTkVTIFNBIERFIENWMS8wLQYDVQQpEyZUT1RBTCBQTEFZIFRFTEVDT01VTklDQUNJT05FUyBTQSBERSBDVjEvMC0GA1UEChMmVE9UQUwgUExBWSBURUxFQ09NVU5JQ0FDSU9ORVMgU0EgREUgQ1YxJTAjBgNVBC0THFRQVDg5MDUxNkpQNSAvIEZPR003MTA1MDRFMTQxHjAcBgNVBAUTFSAvIEZPR003MTA1MDRIREZMUlIwOTEaMBgGA1UECxMRVU5JREFEIE1FWElDTyBERiAwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANSFRN+dpEyX39QShO9K6V6UzzRHRuSduBZ1/tshQWjnKUvAMrC0tsrEPi9A5JI5LFM0+83DsSkGNmJgZVV9IzUVd8osq/VbcujA9v8gbf47R/Yei5VRVGsTmQ8aePWxIsPIJwMbgZqkjCftv0IwHPM0f/VTr/lIhYA+r34UX4kXAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBBQUAA4IBAQBdzyaTRGgH8q4aqAHdnJPHabekleCIrkbph6f2IKWXtUrvfhIIE/SRkF5455vTMb1yU7hZQnkxgn4eJyPj5mz52ZROf6W6pJQGtfarlEcXb4qjXcBilg0KBPVUHUolZjPOL0JhIHUvxhPPT5+p3hZ2FK8vPz8qtlGzkbH420RQH7yLG4qQG95HiKFsBm/9AqIua71SUpILq0ZBw++gjyZa56Qpf0BHDAC6HlqGmM9hcILhpS1DsJJ2jLBEB2JVEYc6LnkmFz/C80JjMMopZH3fsjLDUEc9S1jXShnSX9YDFKtAMtL89AhtYiVJNW+ALjTZjOy3Vx71ooYNt4fTqjsi"
+                  subTotal = "15.655999"
+                  Moneda = "MXN"
+                  total = "18.16096"
+                  tipoDeComprobante = "egreso"
+                  metodoDePago = "Tarjeta de Credito"
+                  LugarExpedicion = "México, DF"
+                  NumCtaPago = "************XXXX">
+  <cfdi:Emisor rfc = "TPT890516JP5"
+               nombre = "TOTAL PLAY TELECOMUNICACIONES S.A. DE C.V.">
+    <cfdi:DomicilioFiscal calle = "PERIFERICO SUR "
+                          noExterior = "4119"
+                          noInterior = "TORRE A PISO 7"
+                          colonia = "FUENTES DEL PEDREGAL"
+                          localidad = "TLALPAN"
+                          municipio = "TLALPAN"
+                          estado = "D.F"
+                          pais = "MEXICO"
+                          codigoPostal = "14141" />
+    <cfdi:RegimenFiscal Regimen = "Régimen General de Ley Personas Morales" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc = "MACC810609543"
+                 nombre = "CLAUDIO MAUBERT CUETO">
+    <cfdi:Domicilio calle = "EJE 1 PONIENTE CUAUHTEMOC  1151 201  Letran Valle  Benito Juarez"
+                    localidad = "Ciudad de Mexico"
+                    municipio = "Ciudad de Mexico"
+                    estado = "DF"
+                    pais = "MX"
+                    codigoPostal = "03650" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad = "1"
+                   unidad = "Servicio y/o renta"
+                   noIdentificacion = "Ajuste"
+                   descripcion = "DESCUENTO PRONTO PAGO TELEFONO"
+                   valorUnitario = "15.65600"
+                   importe = "15.65600" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosTrasladados = "2.50496">
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto = "IVA"
+                     tasa = "16"
+                     importe = "2.50496" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital version = "1.0"
+                             UUID = "2F0470E2-1D87-44E6-A25A-E540F9090C1A"
+                             FechaTimbrado = "2016-01-21T22:07:12"
+                             selloCFD = "lzXZWRp3RRzYX/gMiUPhGu3g40+5P78aV4Hc7Dca3SLbsxGMm5I0Dng322qwtfq9agwOOsmNU+b5KPdWsMLcOooXZOcjxQWQ0RDnk+PU4P1R8od38B1IiUzPU+5DFccS1xdF3b7p5Z7K+0JDtCUHUOp0MU7GDdxZk9RXQhrats4="
+                             noCertificadoSAT = "00001000000202865018"
+                             selloSAT = "Jgz5i9AKUvECLKBrwyyB4ueCe7XWxRKB7ujiZ3mmltSsj7lUidBjSA80cYyloJGxDCumEv/KTrjQO73NKsP1qMZwir2jmtMmFPEorikWXzWV7p/ECvjqUw03UFySmn/XYanMlIuwzopFPp6lqNOO5E76mkYyAGU5MZXuOkphDns="
+                             xsi:schemaLocation = "http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/TimbreFiscalDigital/TimbreFiscalDigital.xsd"
+                             xmlns:tfd = "http://www.sat.gob.mx/TimbreFiscalDigital" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

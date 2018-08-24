@@ -1,0 +1,144 @@
+﻿﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xsi:schemaLocation = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
+                  Version = "3.3"
+                  Serie = "SSS"
+                  Folio = "60660818"
+                  Fecha = "2018-04-10T22:19:31"
+                  FormaPago = "03"
+                  NoCertificado = "00001000000401775210"
+                  Certificado = "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"
+                  SubTotal = "1657.72"
+                  Moneda = "MXN"
+                  TipoCambio = "1"
+                  Total = "1895.45"
+                  TipoDeComprobante = "I"
+                  MetodoPago = "PUE"
+                  LugarExpedicion = "03710"
+                  Sello = "rbgOCaObgJClKPrS5cQtyCppMRd/a+iwkuPo5Z7/3DqQ2ql9ax+1aXrnnDoAg/1pA01JKEG0dPFsVdPKsH2VdTHCyLFqV8OaHpDN9e98zKbaNQIAOFZj8xubSVVgClfwd0PKueVUlQgLUpB5nG4310BrxHFpiaVn5KDZ2Dka54FGSaLpwqlbr2T488O11hDgY87JexOZ6kOrK/9PXdXaZjQGx737L5dbKcNTgADShQzyqbCKtZEVqSacvpTuZUsZLKlsWr+vbw+tD5GvOXsqrYlUHTa2n3QSlSi7dRbsCMMLMaidM7bThOuvAB3+1pvVv6AqTHhYXD/jyWAeer9ofA=="
+                  xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:cfdi = "http://www.sat.gob.mx/cfd/3">
+  <cfdi:Emisor Rfc = "AEB960223JP7"
+               Nombre = "American Express Bank (Mexico), S.A."
+               RegimenFiscal = "601" />
+
+
+  <cfdi:Receptor Rfc = "MACC810609543"
+                 Nombre = "CLAUDIO MAUBERT CUETO"
+                 UsoCFDI = "G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ = "84121500"
+                   Cantidad = "1"
+                   ClaveUnidad = "E48"
+                   Descripcion = "CARGO POR PAGO TARDÍO                   "
+                   ValorUnitario = "350.00"
+                   Importe = "350.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base = "350.00"
+                         Impuesto = "002"
+                         TipoFactor = "Tasa"
+                         TasaOCuota = "0.160000"
+                         Importe = "56.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ = "84121500"
+                   Cantidad = "1"
+                   ClaveUnidad = "E48"
+                   Descripcion = "INTERÉS FINANCIERO                      "
+                   ValorUnitario = "34.76"
+                   Importe = "34.76">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base = "34.76"
+                         Impuesto = "002"
+                         TipoFactor = "Tasa"
+                         TasaOCuota = "0.160000"
+                         Importe = "5.56" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ = "84121500"
+                   Cantidad = "1"
+                   ClaveUnidad = "E48"
+                   Descripcion = "INTERÉS FINANCIERO                      "
+                   ValorUnitario = "10.78"
+                   Importe = "10.78">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base = "10.78"
+                         Impuesto = "002"
+                         TipoFactor = "Tasa"
+                         TasaOCuota = "0.160000"
+                         Importe = "1.72" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ = "84121500"
+                   Cantidad = "1"
+                   ClaveUnidad = "E48"
+                   Descripcion = "INTERÉS FINANCIERO                      "
+                   ValorUnitario = "622.39"
+                   Importe = "622.39">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base = "622.39"
+                         Impuesto = "002"
+                         TipoFactor = "Tasa"
+                         TasaOCuota = "0.160000"
+                         Importe = "99.58" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ = "84121500"
+                   Cantidad = "1"
+                   ClaveUnidad = "E48"
+                   Descripcion = "INTERÉS FINANCIERO                      "
+                   ValorUnitario = "467.91"
+                   Importe = "467.91">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base = "467.91"
+                         Impuesto = "002"
+                         TipoFactor = "Tasa"
+                         TasaOCuota = "0.160000"
+                         Importe = "74.87" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ = "84121500"
+                   Cantidad = "1"
+                   ClaveUnidad = "E48"
+                   Descripcion = "INTERES EXENTO                          "
+                   ValorUnitario = "171.88"
+                   Importe = "171.88">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base = "171.88"
+                         Impuesto = "002"
+                         TipoFactor = "Exento" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados = "237.73">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto = "002"
+                     TipoFactor = "Tasa"
+                     TasaOCuota = "0.160000"
+                     Importe = "237.73" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd = "http://www.sat.gob.mx/TimbreFiscalDigital"
+                             xsi:schemaLocation = "http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"
+                             Version = "1.1"
+                             UUID = "3458AB2E-46D7-41E0-A257-FCF07B193FC0"
+                             FechaTimbrado = "2018-04-12T02:42:00"
+                             RfcProvCertif = "INT020124V62"
+                             SelloCFD = "rbgOCaObgJClKPrS5cQtyCppMRd/a+iwkuPo5Z7/3DqQ2ql9ax+1aXrnnDoAg/1pA01JKEG0dPFsVdPKsH2VdTHCyLFqV8OaHpDN9e98zKbaNQIAOFZj8xubSVVgClfwd0PKueVUlQgLUpB5nG4310BrxHFpiaVn5KDZ2Dka54FGSaLpwqlbr2T488O11hDgY87JexOZ6kOrK/9PXdXaZjQGx737L5dbKcNTgADShQzyqbCKtZEVqSacvpTuZUsZLKlsWr+vbw+tD5GvOXsqrYlUHTa2n3QSlSi7dRbsCMMLMaidM7bThOuvAB3+1pvVv6AqTHhYXD/jyWAeer9ofA=="
+                             NoCertificadoSAT = "00001000000404598147"
+                             SelloSAT = "Yn32dydqXWbwwHGwM5ZE04ljK3WqU7yon3UyzhE9EFFxxFRg1Q7bicHVGdDihjwvUdNSAwCtqiDnGVDPqozGxIDuzB8ocpuCgHUF3Lkzm+EazQfVM/al1KHrg2ZOYbm/9ahC+Nidg0+9j8IWWkmS5kfo8DU6piur18dKM7tBaT0Q0PU2FyM9JhiXlSVxK2q7tQ9zh2ytGyEeR7ehRxkYcbTKaDjYZks9MU9O1O47Y52iQlgcLr2OS+k8QJPtgTkrrmN9IRUoEmrJoRM+xYItCn1fORjYYY8WiCtnY/pugEds/Q8DrIgBeLXY7FKw/LM3FcsNuqEStGtNnsBIngcMYA=="
+    />
+  </cfdi:Complemento>
+</cfdi:Comprobante>
