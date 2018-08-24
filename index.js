@@ -5,12 +5,14 @@ const FS = require('fs');
 const XML = require('libxmljs');
 const XML2JS = require('xml2js');
 const XPATH = require('xml2js-xpath');
-
 const Promise = require('bluebird');
-const parseXML = Promise.promisify(XML2JS.parseString);
+const _map = require('lodash/map');
+const _each = require('lodash/each');
 
 const debug = require('debug')('cfdi');
 const error = require('debug')('app:error');
+
+const parseXML = Promise.promisify(XML2JS.parseString);
 
 class CFDI {
   /**
@@ -32,7 +34,7 @@ class CFDI {
       // we might break on some documents so we're checking first
       try {
         this.xml = XML.parseXmlString(data, {
-          noblanks: false,
+          noblanks: true,
           recover: true,
           noerror: true,
           nonet: true,
@@ -183,9 +185,23 @@ class CFDI {
   }
 
   relacionados() {
-    return null;
-    // if (!this.xml) return null;
-    // return this.xml.get(this.xpath('CfdiRelacionados'));
+    if (!this.xml) {
+      const tipo = XPATH.evalFirst(
+        this.json,
+        '//cfdi:CfdiRelacionados',
+        this.is33() ? 'TipoRelacion' : 'tipoDeRelacion'
+      );
+      const raw = XPATH.find(this.json, '//cfdi:CfdiRelacionados/cfdi:CfdiRelacionado/@UUID');
+      const relacionados = _map(raw, (item) => item.$.UUID);
+
+      return { tipo, relacionados };
+    } else {
+      const tipo = this.xml.get(this.xpath('CfdiRelacionados', this.is33() ? 'TipoRelacion' : 'tipoDeRelacion'));
+      const parent = this.xml.get(this.xpath('CfdiRelacionados'));
+      const relacionados = _map(parent.childNodes(), (item) => item.attr('UUID').value());
+
+      return { tipo, relacionados };
+    }
   }
 
   emisor() {
@@ -199,7 +215,7 @@ class CFDI {
     } else {
       const RFC = this.xml.get(this.xpath('Emisor', this.is33() ? 'Rfc' : 'rfc'));
       const name = this.xml.get(this.xpath('Emisor', this.is33() ? 'Nombre' : 'nombre'));
-      const regime = this.xml.get(this.xpath('Emisor', this.is33() ? 'RegimenFiscal' : 'regimeFiscal')) || null;
+      const regime = this.xml.get(this.xpath('Emisor', this.is33() ? 'RegimenFiscal' : 'regimenFiscal')) || null;
 
       return { RFC, name, regime };
     }
@@ -208,7 +224,7 @@ class CFDI {
   receptor() {
     if (!this.xml) {
       const RFC = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Rfc' : 'rfc');
-      const name = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Nombre' : 'rfc');
+      const name = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Nombre' : 'nombre');
 
       return { RFC, name };
     } else {

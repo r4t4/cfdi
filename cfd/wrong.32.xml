@@ -17,6 +17,10 @@
                   metodoDePago = "Tarjeta de Credito"
                   LugarExpedicion = "México, DF"
                   NumCtaPago = "************XXXX">
+  <cfdi:CfdiRelacionados tipoDeRelacion = "02">
+    <cfdi:CfdiRelacionado UUID = "ED1752FE-E865-4FF2-BFE1-0F552E770DC9" />
+    <cfdi:CfdiRelacionado UUID = "ED1752FE-E865-4FF2-BFE1-0F552E770DC8" />
+  </cfdi:CfdiRelacionados>
   <cfdi:Emisor rfc = "TPT890516JP5"
                nombre = "TOTAL PLAY TELECOMUNICACIONES S.A. DE C.V.">
     <cfdi:DomicilioFiscal calle = "PERIFERICO SUR "
