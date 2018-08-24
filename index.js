@@ -230,7 +230,7 @@ class CFDI {
 
   receptor() {
     if (!this.xml) {
-      cons rfc = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Rfc' : 'rfc');
+      const rfc = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Rfc' : 'rfc');
       const nombre = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Nombre' : 'nombre');
 
       return { rfc, name };
