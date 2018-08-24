@@ -185,23 +185,30 @@ class CFDI {
   }
 
   relacionados() {
+    let relacionados = [];
     if (!this.xml) {
-      const tipo = XPATH.evalFirst(
-        this.json,
-        '//cfdi:CfdiRelacionados',
-        this.is33() ? 'TipoRelacion' : 'tipoDeRelacion'
-      );
-      const raw = XPATH.find(this.json, '//cfdi:CfdiRelacionados/cfdi:CfdiRelacionado/@UUID');
-      const relacionados = _map(raw, (item) => item.$.UUID);
+      const parent = XPATH.find(this.json, '//cfdi:CfdiRelacionados');
+      if (parent) {
+        const tipo = XPATH.evalFirst(
+          this.json,
+          '//cfdi:CfdiRelacionados',
+          this.is33() ? 'TipoRelacion' : 'tipoDeRelacion'
+        );
+        const raw = XPATH.find(this.json, '//cfdi:CfdiRelacionados/cfdi:CfdiRelacionado/@UUID');
+        relacionados = _map(raw, (item) => item.$.UUID);
 
-      return { tipo, relacionados };
+        return { tipo, relacionados };
+      }
     } else {
-      const tipo = this.xml.get(this.xpath('CfdiRelacionados', this.is33() ? 'TipoRelacion' : 'tipoDeRelacion'));
       const parent = this.xml.get(this.xpath('CfdiRelacionados'));
-      const relacionados = _map(parent.childNodes(), (item) => item.attr('UUID').value());
+      if (parent) {
+        const tipo = this.xml.get(this.xpath('CfdiRelacionados', this.is33() ? 'TipoRelacion' : 'tipoDeRelacion'));
+        relacionados = _map(parent.childNodes(), (item) => item.attr('UUID').value());
 
-      return { tipo, relacionados };
+        return { tipo, relacionados };
+      }
     }
+    return null;
   }
 
   emisor() {
