@@ -213,32 +213,32 @@ class CFDI {
 
   emisor() {
     if (!this.xml) {
-      const RFC = XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'Rfc' : 'rfc');
-      const name = XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'Nombre' : 'nombre');
-      const regime =
+      const rfc = XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'Rfc' : 'rfc');
+      const nombre = XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'Nombre' : 'nombre');
+      const regimen =
         XPATH.evalFirst(this.json, '//cfdi:Emisor', this.is33() ? 'RegimenFiscal' : 'regimenFiscal') || null;
 
-      return { RFC, name, regime };
+      return { rfc, nombre, regimen };
     } else {
-      const RFC = this.xml.get(this.xpath('Emisor', this.is33() ? 'Rfc' : 'rfc'));
-      const name = this.xml.get(this.xpath('Emisor', this.is33() ? 'Nombre' : 'nombre'));
-      const regime = this.xml.get(this.xpath('Emisor', this.is33() ? 'RegimenFiscal' : 'regimenFiscal')) || null;
+      const rfc = this.xml.get(this.xpath('Emisor', this.is33() ? 'Rfc' : 'rfc'));
+      const nombre = this.xml.get(this.xpath('Emisor', this.is33() ? 'Nombre' : 'nombre'));
+      const regimen = this.xml.get(this.xpath('Emisor', this.is33() ? 'RegimenFiscal' : 'regimenFiscal')) || null;
 
-      return { RFC, name, regime };
+      return { rfc, nombre, regimen };
     }
   }
 
   receptor() {
     if (!this.xml) {
-      const RFC = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Rfc' : 'rfc');
-      const name = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Nombre' : 'nombre');
+      cons rfc = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Rfc' : 'rfc');
+      const nombre = XPATH.evalFirst(this.json, '//cfdi:Receptor', this.is33() ? 'Nombre' : 'nombre');
 
-      return { RFC, name };
+      return { rfc, name };
     } else {
-      const RFC = this.xml.get(this.xpath('Receptor', this.is33() ? 'Rfc' : 'rfc'));
-      const name = this.xml.get(this.xpath('Receptor', this.is33() ? 'Nombre' : 'nombre'));
+      const rfc = this.xml.get(this.xpath('Receptor', this.is33() ? 'Rfc' : 'rfc'));
+      const nombre = this.xml.get(this.xpath('Receptor', this.is33() ? 'Nombre' : 'nombre'));
 
-      return { RFC, name };
+      return { rfc, nombre };
     }
   }
 
