@@ -28,6 +28,7 @@ class CFDI {
 
       if (FS.existsSync(xmlORpath)) {
         data = FS.readFileSync(xmlORpath);
+        data = data.toString('utf-8').replace('\ufeff', '');
       }
       // we might break on some documents so we're checking first
       try {
@@ -47,6 +48,7 @@ class CFDI {
         resolve(this);
         // we might not get home the easy way
       } catch (e) {
+        debug(`CANNOT PARSE XML DIRECTLY CONVERTING TO JSON: ${xmlORpath}`);
         this.xml = false;
         debug(e.message);
         parseXML(data)

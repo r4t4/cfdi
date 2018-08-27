@@ -5,7 +5,7 @@ const main = async () => {
   const e32 = await new CFDI('./cfd/wrong.32.xml');
   const e33 = await new CFDI('./cfd/wrong.33.xml');
   const good = await new CFDI('./cfd/signed.xml');
-  const another = await new CFDI('./cfd/payment.xml');
+  const related = await new CFDI('./cfd/relacionados.xml');
 
   debug('= = = = = = WRONG 3.2 = = = = = = = =');
   // debug(e32.comprobante());
@@ -34,14 +34,14 @@ const main = async () => {
   // debug(good.receptor());
   debug('= = = = = = RIGHT = = = = = = = =');
 
-  debug('= = = = = = ANOTHER = = = = = = = =');
-  // debug(another.comprobante());
-  debug(another.relacionados());
-  // debug(another.crypto());
-  // debug(another.uuid());
-  // debug(another.emisor());
-  // debug(another.receptor());
-  debug('= = = = = = ANOTHER = = = = = = = =');
+  debug('= = = = = = RELATED = = = = = = = =');
+  // debug(related.comprobante());
+  debug(related.relacionados());
+  // debug(related.crypto());
+  // debug(related.uuid());
+  // debug(related.emisor());
+  // debug(related.receptor());
+  debug('= = = = = = RELATD = = = = = = = =');
 };
 
 main();
