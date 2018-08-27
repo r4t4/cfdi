@@ -1,10 +1,10 @@
 {
   "name": "cfdi-parser",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Simple CFDI Library",
   "main": "index.js",
   "scripts": {
-    "parse": "node parse.js"
+    "parse": "export DEBUG='cfdi:*'; node parse.js"
   },
   "author": "Claudio Maubert <claudio@moullo.info>",
   "license": "ISC",

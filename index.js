@@ -7,10 +7,8 @@ const XML2JS = require('xml2js');
 const XPATH = require('xml2js-xpath');
 const Promise = require('bluebird');
 const _map = require('lodash/map');
-const _each = require('lodash/each');
 
-const debug = require('debug')('cfdi');
-const error = require('debug')('app:error');
+const debug = require('debug')('cfdi:main');
 
 const parseXML = Promise.promisify(XML2JS.parseString);
 
@@ -208,6 +206,7 @@ class CFDI {
         return { tipo, relacionados };
       }
     }
+
     return null;
   }
 
