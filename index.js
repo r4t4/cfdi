@@ -28,7 +28,9 @@ class CFDI {
 
       if (FS.existsSync(xmlORpath)) {
         data = FS.readFileSync(xmlORpath);
-        data = data.toString('utf-8').replace('\ufeff', '');
+        data = data.toString('utf-8');
+        // data.replace('\ufeff', '');
+        while (data.charCodeAt(0) == 0xefff) data = data.substr(1);
       }
       // we might break on some documents so we're checking first
       try {
@@ -244,15 +246,23 @@ class CFDI {
   }
 
   conceptos() {
-    return null;
-    // if (!this.xml) return null;
-    // return this.xml.get(this.xpath('Concepto'));
+    if (!this.xml) {
+      return XPATH.find(this.json, '//cfdi:Concepto');
+    } else {
+      const concepto = this.xpath('Concepto');
+
+      return this.xml.get(concepto);
+    }
   }
 
   impuestos() {
-    return null;
-    // if (!this.xml) return null;
-    // return this.xml.get(this.xpath('Impuestos'));
+    if (!this.xml) {
+      return XPATH.find(this.json, '//cfdi:Impuestos');
+    } else {
+      const impuestos = this.xpath('Impuestos');
+
+      return this.xml.get(impuestos);
+    }
   }
 
   uuid() {
@@ -267,12 +277,13 @@ class CFDI {
   }
 
   complemento() {
-    return null;
-    // if (!this.xml) return null;
-    // const uuid = this.xml.get(this.xpath('TimbreFiscalDigital', 'UUID'));
-    // const fecha = this.xml.get(this.xpath('TimbreFiscalDigital', 'FechaTimbrado'));
+    if (!this.xml) {
+      return XPATH.find(this.json, '//cfdi:Complemento');
+    } else {
+      const complemento = this.xpath('Complemento');
 
-    // return { uuid, fecha };
+      return this.xml.get(complemento);
+    }
   }
 }
 
