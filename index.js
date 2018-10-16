@@ -7,6 +7,8 @@ const XML2JS = require('xml2js');
 const XPATH = require('xml2js-xpath');
 const Promise = require('bluebird');
 const _map = require('lodash/map');
+const strip = require('strip-bom');
+
 
 const debug = require('debug')('cfdi:main');
 
@@ -29,8 +31,8 @@ class CFDI {
       if (FS.existsSync(xmlORpath)) {
         data = FS.readFileSync(xmlORpath);
         data = data.toString('utf-8');
-        // data.replace('\ufeff', '');
-        while (data.charCodeAt(0) == 0xefff) data = data.substr(1);
+        data = strip(data);
+        // while (data.charCodeAt(0) == 0xEFFF) data = data.substr(1);
       }
       // we might break on some documents so we're checking first
       try {
@@ -50,17 +52,23 @@ class CFDI {
         resolve(this);
         // we might not get home the easy way
       } catch (e) {
+        debug(e.message);
         debug(`CANNOT PARSE XML DIRECTLY CONVERTING TO JSON: ${xmlORpath}`);
         this.xml = false;
-        debug(e.message);
-        parseXML(data)
-          .then((json) => {
-            self.json = json;
-            self.v = self.version();
-            debug(`CFDI:${this.v}`);
-            resolve(self);
-          })
-          .catch(reject);
+        // and since this is our last chance againg we wrap the parsing within a try/catch block
+        try {
+          parseXML(data)
+            .then((json) => {
+              self.json = json;
+              self.v = self.version();
+              debug(`CFDI:${this.v}`);
+              resolve(self);
+            })
+            .catch(reject);
+        } catch (error) {
+          debug(`CANNOT PARSE TO JSON: ${xmlORpath}`);
+          reject(error);
+        }
       }
     });
   }

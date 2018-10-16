@@ -13,6 +13,7 @@
     "debug": "3.1.0",
     "libxmljs": "0.19.1",
     "lodash": "4.17.10",
+    "strip-bom": "3.0.0",
     "xml2js": "0.4.19",
     "xml2js-xpath": "0.9.0"
   }
