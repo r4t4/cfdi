@@ -1,6 +1,6 @@
 {
   "name": "cfdi-parser",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Simple CFDI Library",
   "main": "index.js",
   "scripts": {

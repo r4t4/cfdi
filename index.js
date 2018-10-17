@@ -48,7 +48,7 @@ class CFDI {
         });
         // now we know we can access the CFD's version
         this.v = this.version();
-        debug(`CFDI:${this.v}`);
+        // debug(`CFDI:${this.v}`);
         resolve(this);
         // we might not get home the easy way
       } catch (e) {
@@ -61,11 +61,12 @@ class CFDI {
             .then((json) => {
               self.json = json;
               self.v = self.version();
-              debug(`CFDI:${this.v}`);
+              // debug(`CFDI:${this.v}`);
               resolve(self);
             })
             .catch(reject);
         } catch (error) {
+
           debug(`CANNOT PARSE TO JSON: ${xmlORpath}`);
           reject(error);
         }
